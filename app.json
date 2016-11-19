@@ -3,5 +3,5 @@
   "description": "",
   "repository": "",
   "keywords": ["python", "eve", "Flask" ],
-  "addons": [ "heroku-postgresql" ]
+  "addons": [ "mongolab" ]
 }

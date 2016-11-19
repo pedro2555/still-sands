@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 
 # We want to seamlessy run our API both locally and on Heroku. If running on
