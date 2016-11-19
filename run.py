@@ -2,6 +2,8 @@
 
 import os
 from eve import Eve
+from flask.ext.bootstrap import Bootstrap
+from eve_docs import eve_docs
 
 # Heroku support: bind to PORT if defined, otherwise default to 5000.
 if 'PORT' in os.environ:
@@ -17,4 +19,7 @@ app = Eve()
 
 
 if __name__ == '__main__':
-    app.run(host=host, port=port, debug=True)
+	Bootstrap(app)
+	app.register_blueprint(eve_docs, url_prefix='/docs')
+
+	app.run(host=host, port=port, debug=True)
