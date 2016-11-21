@@ -18,7 +18,7 @@ products = {
 			'field': 'description'
 		},
 	'mongo_indexes': {
-		'text': ([('descripton', 1)])
+		'text': ([('description', 1)])
 	},
 	'schema': {
 		'ean13': { 
