@@ -45,7 +45,7 @@ MONGO_USERNAME = os.environ.get('MONGO_USERNAME', '')
 MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', '')
 MONGO_DBNAME = os.environ.get('MONGO_DBNAME', 'still-sands-21077')
 
-X_DOMAINS = 'localhost:8080'
+X_DOMAINS = '*'
 
 DOMAIN = {
 	'products': products
