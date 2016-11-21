@@ -17,6 +17,9 @@ products = {
 			'url': 'regex("[\w]+")',
 			'field': 'description'
 		},
+	'mongo_indexes': {
+		'text': ([('descripton', 1)])
+	},
 	'schema': {
 		'ean13': { 
 			'type': 'string',
