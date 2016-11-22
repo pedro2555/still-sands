@@ -2,6 +2,27 @@
 
 import os
 
+accounts = {
+	'resource_methods': ['GET', 'POST'],
+	'item_methods': ['GET', 'PATCH', 'DELETE'],
+	'schema': {
+		'email': {
+			'type': 'string',
+			'required': True,
+			'unique': True
+		},
+		'salt': {
+			'type': 'string'
+		},
+		'password': {
+			'type': 'string'
+		},
+		'fullName': {
+			'type': 'string'
+		}
+	}
+}
+
 products = {
 	'resource_methods': ['GET', 'POST', 'DELETE'],
 	'item_methods': ['GET', 'PATCH', 'DELETE', 'PUT'],
@@ -51,5 +72,6 @@ MONGO_DBNAME = os.environ.get('MONGO_DBNAME', 'still-sands-21077')
 X_DOMAINS = '*'
 
 DOMAIN = {
+	'accounts': accounts,
 	'products': products
 }
