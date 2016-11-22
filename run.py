@@ -22,24 +22,25 @@ else:
 
 # Authentication logic
 class Sha1Auth(BasicAuth):
-    def check_auth(self, username, password, allowed_roles, resource, method):
-    	return True
-    	# account = app.data.driver.db['accounts'].find_one({
-    	# 	'email': username
-    	# 	})
-     #    return account and \
-     #    	hashlib.sha1(account['salt'] + password).hexdigest() == \
-     #    	account['password']
+	def check_auth(self, username, password, allowed_roles, resource, method):
+		accounts = app.data.driver.db['accounts']
+		account = accounts.find_one({
+			'email': username
+			})
+		return account and \
+			hashlib.sha1(account['salt'] + password).hexdigest() == \
+			account['password']
 
 
 app = Eve(auth=Sha1Auth)
 
 def on_insert_accounts(items):
-	items[0]['salt'] = hashlib.sha1(str(uuid.uuid4())).hexdigest()
-	items[0]['password'] = hashlib.sha1(items[0]['salt'] + items[0]['password']).hexdigest()
-	items = [
-		items[0]
-	]
+	i = 0
+	for item in items:
+		items[i]['salt'] = hashlib.sha1(str(uuid.uuid4())).hexdigest()
+		items[i]['password'] = hashlib.sha1(items[i]['salt'] + items[i]['password']).hexdigest()
+		i+=1
+		pass
 app.on_insert_accounts += on_insert_accounts
 
 if __name__ == '__main__':
