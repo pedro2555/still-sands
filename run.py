@@ -37,7 +37,7 @@ class Sha1Auth(BasicAuth):
 
 app = Eve(auth=Sha1Auth)
 
-
+# Generates salt and hashes password for storing
 def on_insert_accounts_callback(items):
 	i = 0
 	for item in items:
@@ -46,6 +46,18 @@ def on_insert_accounts_callback(items):
 		i += 1
 		pass
 app.on_insert_accounts += on_insert_accounts_callback
+
+# Updates auth_field to limit every user's scope on the accounts table to their own account entry
+def on_inserted_accounts_callback(items):
+	accounts = app.data.driver.db['accounts']
+	i = 0
+	for item in items:
+		accounts.update(
+			{ '_id': items[i]['_id']},
+			{ '$set': { 'account_id': items[i]['_id']}})
+		i += 1
+		pass
+app.on_inserted_accounts += on_inserted_accounts_callback
 
 def pre_accounts_get_callback(request, lookup):
 	lookkup = { '_id': current_app.auth.get_request_auth_value() }
