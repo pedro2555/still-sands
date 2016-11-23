@@ -3,8 +3,14 @@
 import os
 
 accounts = {
-	'resource_methods': ['GET', 'POST'],
+	'resource_methods': ['POST', 'DELETE', 'GET'],
+	'public_methods': ['POST', 'DELETE'],
 	'item_methods': ['GET', 'PATCH', 'DELETE'],
+	'auth_field': 'account_id',
+	'additional_lookup': {
+			'url': 'regex("[\d]+")',
+			'field': 'email'
+	},
 	'schema': {
 		'email': {
 			'type': 'string',
@@ -28,16 +34,14 @@ products = {
 	'item_methods': ['GET', 'PATCH', 'DELETE', 'PUT'],
 	'allow_unknown': True,
 	'transparent_schema_rules': True,
-	'additional_lookup':
-		{
+	'additional_lookup': {
 			'url': 'regex("[\d]+")',
 			'field': 'ean13'
-		},
-	'additional_lookup':
-		{
+	},
+	'additional_lookup': {
 			'url': 'regex("[\w]+")',
 			'field': 'description'
-		},
+	},
 	'mongo_indexes': {
 		'description_text': ([('description', 'text')])
 	},
