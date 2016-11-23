@@ -3,9 +3,9 @@
 import os
 
 accounts = {
-	'resource_methods': ['POST', 'DELETE', 'GET'],
-	'public_methods': ['POST', 'DELETE'],
-	'item_methods': ['GET', 'PATCH', 'DELETE'],
+	'resource_methods': ['POST', 'GET'],
+	'public_methods': ['POST'],
+	'item_methods': ['GET', 'PATCH'],
 	'auth_field': 'account_id',
 	'additional_lookup': {
 			'url': 'regex("[\d]+")',
@@ -36,8 +36,8 @@ accounts = {
 }
 
 products = {
-	'resource_methods': ['GET', 'POST', 'DELETE'],
-	'item_methods': ['GET', 'PATCH', 'DELETE', 'PUT'],
+	'resource_methods': ['GET', 'POST'],
+	'item_methods': ['GET', 'PATCH', 'PUT'],
 	'allow_unknown': True,
 	'transparent_schema_rules': True,
 	'additional_lookup': {
