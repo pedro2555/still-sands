@@ -11,6 +11,12 @@ accounts = {
 			'url': 'regex("[\d]+")',
 			'field': 'email'
 	},
+    'datasource': {
+        'projection': {
+        	'email': 1,
+        	'fullName': 1
+        }
+    },
 	'schema': {
 		'email': {
 			'type': 'string',
