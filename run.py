@@ -45,7 +45,15 @@ def on_insert_accounts_callback(items):
 		items[i]['password'] = hashlib.sha1(items[i]['salt'] + items[i]['password']).hexdigest() 
 		i += 1
 		pass
+def on_update_accounts_callback(updates, original):
+	# early exit if the password wasn't updated
+	if 'password' not in updates:
+		return
+
+	account = app.data.driver.db['accounts'].find_one({'_id': original['_id']})
+	updates['password'] = hashlib.sha1(account['salt'] + updates['password']).hexdigest() 
 app.on_insert_accounts += on_insert_accounts_callback
+app.on_update_accounts += on_update_accounts_callback
 
 # Updates auth_field to limit every user's scope on the accounts table to their own account entry
 def on_inserted_accounts_callback(items):
